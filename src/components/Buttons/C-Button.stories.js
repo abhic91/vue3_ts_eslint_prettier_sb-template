@@ -1,12 +1,14 @@
-import Button from '../Button/MyButton.vue'
+import CButton from './C-Button.vue'
 
-// More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Button',
-  component: Button,
+  title: 'Components/Button',
+  component: CButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     onClick: {},
+    controls: {
+      txtColor: {type: 'select', options: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"]},
+    },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg', 'xl'],
@@ -17,13 +19,13 @@ export default {
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
-  components: { Button },
+  components: { CButton },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return { args };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<my-button v-bind="args" />',
+  template: '<c-button v-bind="args" />',
 });
 
 export const Primary = Template.bind({});
@@ -31,4 +33,17 @@ export const Primary = Template.bind({});
 Primary.args = {
   color: "primary",
   label: 'Buttons',
+};
+export const LargeSecondary = Template.bind({});
+LargeSecondary.args = {
+  label: 'Large Secondary',
+  size: "lg",
+  color: "secondary",
+};
+
+export const ColorNameInProps = Template.bind({});
+ColorNameInProps.args = {
+  size: 'sm',
+  label: 'Small btn with  color in props',
+  color: "purple"
 };
